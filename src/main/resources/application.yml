@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: kafka-streams
+  cloud:
+    function:
+      definition: computerEventConsumer;computerEventProducer
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9094
+      bindings:
+        computerEventConsumer-in-0:
+          destination: computer-request-topic
+
+        computerEventProducer-out-0:
+          destination: computer-request-topic
+
+  datasource:
+    url: jdbc:postgresql://localhost:5440/kafka_streams_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
